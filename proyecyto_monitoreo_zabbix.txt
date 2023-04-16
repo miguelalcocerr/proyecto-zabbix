@@ -1,0 +1,20 @@
+Proyecto zabbix en contenedores usando docker compose:
+
+
+
+
+
+
+REPOSITORIO DE ZABBIX
+wget https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb
+   64  dpkg -i zabbix-release_6.4-1+ubuntu22.04_all.deb
+   65  apt update 
+   66  apt install zabbix-agent2 zabbix-agent2-plugin-*
+   67  systemctl restart zabbix-agent2
+   68  systemctl enable zabbix-agent2
+   69  systemctl status  zabbix-agent2
+
+Cambiando el hostname del linux   
+hostnamectl  set-hostname ubuntumiguel01
+   74  exec hostnamectl 
+   75  cat /etc/hosts

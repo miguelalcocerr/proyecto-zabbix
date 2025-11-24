@@ -176,3 +176,16 @@ URL: http://<IP_SERVIDOR>:8080
 Usuario: Admin
 Password: zabbix
 
+
+#########################################################################
+Implementando Grafana On-Premises
+
+# Actualizar sistema
+dnf update -y
+
+# Instalar herramientas básicas
+dnf install -y vim wget curl net-tools
+
+
+
+

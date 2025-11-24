@@ -147,21 +147,28 @@ grep -E "^DB" /etc/zabbix/zabbix_server.conf
 
 
 PASO 7: Configurar NGINX
-bash# Editar configuración NGINX
-vim /etc/nginx/conf.d/zabbix.conf
+bash# Configurar listen port y server_name
+sed -i 's/#        listen          8080;/        listen 8080;/' /etc/nginx/conf.d/zabbix.conf
+sed -i 's/#        server_name     example.com;/        server_name zabbix.marriott.local;/' /etc/nginx/conf.d/zabbix.conf
 
-# Descomentar y configurar:
-listen 8080;
-server_name zabbix.marriott.local;
+# Verificar
+grep -E "listen|server_name" /etc/nginx/conf.d/zabbix.conf | head -4
+
+
 PASO 8: Configurar PHP Timezone
-bashvim /etc/php-fpm.d/zabbix.conf
+bash# Configurar timezone Lima
+sed -i 's/^; php_value\[date.timezone\].*/php_value[date.timezone] = America\/Lima/' /etc/php-fpm.d/zabbix.conf
 
-# Descomentar y configurar:
-php_value[date.timezone] = America/Lima
+# Verificar
+grep "date.timezone" /etc/php-fpm.d/zabbix.conf
+
+
 PASO 9: Iniciar Servicios
 bashsystemctl restart zabbix-server zabbix-agent2 nginx php-fpm
 systemctl enable zabbix-server zabbix-agent2 nginx php-fpm
-```
+systemctl status zabbix-server nginx --no-pager
+
+
 
 ## PASO 10: Acceder al Frontend
 ```

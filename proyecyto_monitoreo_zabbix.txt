@@ -207,3 +207,9 @@ EOF
 dnf repolist | grep grafana
 
 
+# Instalar Grafana Open Source
+dnf install grafana -y
+
+# Verificar versión instalada
+grafana-server -v
+

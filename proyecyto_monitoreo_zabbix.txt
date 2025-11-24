@@ -226,3 +226,16 @@ systemctl status grafana-server --no-pager
 ss -tlnp | grep 3000
 
 
+
+ASE 5: Instalar Plugin Zabbix
+bash# Instalar plugin oficial Zabbix
+grafana-cli plugins install alexanderzobnin-zabbix-app
+
+# Reiniciar Grafana para cargar el plugin
+systemctl restart grafana-server
+
+# Verificar estado
+systemctl status grafana-server --no-pager
+
+
+

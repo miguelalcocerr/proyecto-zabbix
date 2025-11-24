@@ -131,12 +131,21 @@ zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-charact
 
 # d. Desactivar log_bin_trust_function_creators
 mysql -u root -p -e "SET GLOBAL log_bin_trust_function_creators = 0;"
-PASO 6: Configurar Zabbix Server
-bash# Editar configuración
-vim /etc/zabbix/zabbix_server.conf
 
-# Configurar estos parámetros:
-DBPassword=TU_PASSWORD_SEGURO
+
+
+PASO 6: Configurar Zabbix Server
+
+# Configurar zabbix_server.conf
+sed -i 's/^# DBHost=localhost/DBHost=localhost/' /etc/zabbix/zabbix_server.conf
+sed -i 's/^# DBPassword=/DBPassword=PASSWORD/' /etc/zabbix/zabbix_server.conf
+
+# Verificar configuración
+grep -E "^DB" /etc/zabbix/zabbix_server.conf
+
+
+
+
 PASO 7: Configurar NGINX
 bash# Editar configuración NGINX
 vim /etc/nginx/conf.d/zabbix.conf

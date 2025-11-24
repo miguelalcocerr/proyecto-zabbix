@@ -66,3 +66,16 @@ mount -a
 df -h | grep zabbix
 lsblk /dev/sdb
 
+
+# Instalar herramientas básicas
+dnf install -y epel-release vim wget curl net-tools bind-utils telnet
+
+# Instalar y habilitar Chrony (NTP)
+dnf install -y chrony
+systemctl enable chronyd --now
+chronyc tracking
+
+# Configurar hostname
+hostnamectl set-hostname zabbix.marriott.local
+echo "$(hostname -I | awk '{print $1}') zabbix.marriott.local zabbix" >> /etc/hosts
+

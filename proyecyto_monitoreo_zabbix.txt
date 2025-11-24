@@ -34,7 +34,7 @@ pvcreate /dev/sdb
 vgcreate vg_zabbix /dev/sdb
 
 # 2. Crear todos los LVs
-lvcreate -L 50G -n lv_mysql vg_zabbix
+lvcreate -L 20G -n lv_mysql vg_zabbix
 lvcreate -L 10G -n lv_zabbix_logs vg_zabbix
 lvcreate -L 5G  -n lv_zabbix_web vg_zabbix
 lvcreate -L 1G  -n lv_zabbix_etc vg_zabbix

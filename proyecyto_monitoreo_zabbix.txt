@@ -18,3 +18,47 @@ Cambiando el hostname del linux
 hostnamectl  set-hostname ubuntumiguel01
    74  exec hostnamectl 
    75  cat /etc/hosts
+
+########################################################################
+Implementando zabbix on-premises:
+
+Estructura completa en sdb
+LVTamañoMontajeContenidolv_mysql50G/var/lib/mysqlBase de datoslv_zabbix_logs10G/var/log/zabbixLogs servidorlv_zabbix_web5G/usr/share/zabbixFrontend PHPlv_zabbix_etc1G/etc/zabbixConfiguracioneslibre~34G-Crecimiento futuro
+Procedimiento
+bash# 1. Crear PV y VG
+pvcreate /dev/sdb
+vgcreate vg_zabbix /dev/sdb
+
+# 2. Crear todos los LVs
+lvcreate -L 50G -n lv_mysql vg_zabbix
+lvcreate -L 10G -n lv_zabbix_logs vg_zabbix
+lvcreate -L 5G  -n lv_zabbix_web vg_zabbix
+lvcreate -L 1G  -n lv_zabbix_etc vg_zabbix
+
+# 3. Formatear
+mkfs.xfs /dev/vg_zabbix/lv_mysql
+mkfs.xfs /dev/vg_zabbix/lv_zabbix_logs
+mkfs.xfs /dev/vg_zabbix/lv_zabbix_web
+mkfs.xfs /dev/vg_zabbix/lv_zabbix_etc
+
+# 4. Crear directorios
+mkdir -p /var/lib/mysql
+mkdir -p /var/log/zabbix
+mkdir -p /usr/share/zabbix
+mkdir -p /etc/zabbix
+
+# 5. Agregar a fstab
+cat >> /etc/fstab << 'EOF'
+/dev/vg_zabbix/lv_mysql        /var/lib/mysql      xfs  defaults  0 0
+/dev/vg_zabbix/lv_zabbix_logs  /var/log/zabbix     xfs  defaults  0 0
+/dev/vg_zabbix/lv_zabbix_web   /usr/share/zabbix   xfs  defaults  0 0
+/dev/vg_zabbix/lv_zabbix_etc   /etc/zabbix         xfs  defaults  0 0
+EOF
+
+# 6. Montar todo
+mount -a
+
+# 7. Verificar
+df -h | grep zabbix
+lsblk /dev/sdb
+

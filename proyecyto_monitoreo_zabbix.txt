@@ -213,3 +213,16 @@ dnf install grafana -y
 # Verificar versión instalada
 grafana-server -v
 
+# Recargar systemd
+systemctl daemon-reload
+
+# Habilitar e iniciar Grafana
+systemctl enable grafana-server --now
+
+# Verificar estado
+systemctl status grafana-server --no-pager
+
+# Verificar puerto 3000
+ss -tlnp | grep 3000
+
+

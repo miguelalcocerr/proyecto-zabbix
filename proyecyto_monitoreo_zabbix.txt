@@ -238,4 +238,24 @@ systemctl restart grafana-server
 systemctl status grafana-server --no-pager
 
 
+http://IP:3000
 
+
+FASE 7: Habilitar Plugin y Configurar Data Source
+Paso 1: Habilitar Plugin Zabbix
+
+En el menú izquierdo: Administration → Plugins
+Buscar: Zabbix
+Click en el plugin Zabbix
+Click en Enable
+
+Paso 2: Agregar Data Source
+
+En el menú izquierdo: Connections → Data sources
+Click Add data source
+Buscar y seleccionar: Zabbix
+
+Paso 3: Configurar conexión
+ParámetroValorURLhttp://10.160.56.7:8080/api_jsonrpc.phpUsernameAdminPassword(el que configuraste en Zabbix)Trends✅ Enabled
+
+Click Save & Test

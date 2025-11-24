@@ -186,6 +186,24 @@ dnf update -y
 # Instalar herramientas básicas
 dnf install -y vim wget curl net-tools
 
+# Importar GPG key
+wget -q -O gpg.key https://rpm.grafana.com/gpg.key
+rpm --import gpg.key
 
+# Crear archivo de repositorio
+cat > /etc/yum.repos.d/grafana.repo << 'EOF'
+[grafana]
+name=grafana
+baseurl=https://rpm.grafana.com
+repo_gpgcheck=1
+enabled=1
+gpgcheck=1
+gpgkey=https://rpm.grafana.com/gpg.key
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+EOF
+
+# Verificar repositorio
+dnf repolist | grep grafana
 
 

@@ -23,8 +23,12 @@ hostnamectl  set-hostname ubuntumiguel01
 Implementando zabbix on-premises:
 
 Estructura completa en sdb
-LVTamañoMontajeContenidolv_mysql50G/var/lib/mysqlBase de datoslv_zabbix_logs10G/var/log/zabbixLogs servidorlv_zabbix_web5G/usr/share/zabbixFrontend PHPlv_zabbix_etc1G/etc/zabbixConfiguracioneslibre~34G-Crecimiento futuro
-Procedimiento
+
+
+
+
+
+
 bash# 1. Crear PV y VG
 pvcreate /dev/sdb
 vgcreate vg_zabbix /dev/sdb

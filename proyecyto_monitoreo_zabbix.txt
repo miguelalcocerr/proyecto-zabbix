@@ -259,3 +259,9 @@ Paso 3: Configurar conexión
 ParámetroValorURLhttp://10.160.56.7:8080/api_jsonrpc.phpUsernameAdminPassword(el que configuraste en Zabbix)Trends✅ Enabled
 
 Click Save & Test
+
+
+
+Descargar el agente Windows:
+https://www.zabbix.com/download_agents?version=7.0+LTS&release=7.0.21&os=Windows&os_version=Server+2016+%2B&hardware=amd64&encryption=OpenSSL&packaging=MSI&show_legacy=0
+
